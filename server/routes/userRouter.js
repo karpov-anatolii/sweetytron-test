@@ -1,0 +1,12 @@
+const Router = require("express");
+const userController = require("../controllers/userController");
+const router = new Router();
+const UserController = require("../controllers/userController");
+const authMiddleware = require("../middleware/authMiddleware");
+
+router.post("/registration", userController.registration);
+router.post("/login", userController.login);
+
+router.get("/auth", authMiddleware, userController.check); // middelware передаем 2-м параметром в  get запрос, чтобы проверять пользователя на авторизованность
+
+module.exports = router;
